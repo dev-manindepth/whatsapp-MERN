@@ -1,7 +1,8 @@
 import { Box, Dialog, styled } from "@mui/material";
 import React from "react";
 import { useContext } from "react";
-import { AccountContext } from "../../context/AccountProvider";
+// import { AccountContext } from "../../context/AccountProvider";
+import { UserContext } from "../../context/UserProvider";
 import ChatBox from "./chat/ChatBox";
 import EmptyChat from "./chat/EmptyChat";
 import Menu from "./menu/Menu";
@@ -29,7 +30,7 @@ const dialogStyle = {
   overflow: "hidden",
 };
 const ChatDialog = () => {
-  const { person } = useContext(AccountContext);
+  const { person } = useContext(UserContext);
   return (
     <Dialog
       open={true}

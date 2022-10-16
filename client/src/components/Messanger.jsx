@@ -10,7 +10,7 @@ const Component = styled(Box)`
 `;
 const Header = styled(AppBar)`
   height: 125px;
-  background: #00A884;
+  background: #00a884;
   box-shadow: none;
 `;
 const LoginHeader = styled(AppBar)`

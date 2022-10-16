@@ -2,6 +2,7 @@ import "./App.css";
 import Messanger from "./components/Messanger";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import AccountProvider from "./context/AccountProvider";
+import UserProvider from "./context/UserProvider";
 
 function App() {
   const clientId =
@@ -9,9 +10,12 @@ function App() {
 
   return (
     <GoogleOAuthProvider clientId={clientId}>
+      <UserProvider>
+
       <AccountProvider>
         <Messanger />
       </AccountProvider>
+      </UserProvider>
     </GoogleOAuthProvider>
   );
 }
