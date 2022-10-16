@@ -1,8 +1,10 @@
+import { GetApp as GetAppIcon } from "@mui/icons-material";
 import { Box, Typography, styled } from "@mui/material";
 import React from "react";
 import { useContext } from "react";
 import { AccountContext } from "../../../context/AccountProvider";
-import { formatDate } from "../../../utils/common-utils";
+import { downloadMedia, formatDate } from "../../../utils/common-utils";
+import {iconPDF} from '../../../constants/data'
 
 const Own = styled(Box)`
   background: #dcf8c6;
@@ -40,17 +42,54 @@ const Message = ({ message }) => {
     <>
       {account.sub === message.senderId ? (
         <Own>
-          <Text>{message.text}</Text>
-          <Time> {formatDate(message.createdAt)}</Time>
+          {message.type === "file" ? (
+            <ImageMessage message={message} />
+          ) : (
+            <TextMessage message={message} />
+          )}
         </Own>
       ) : (
         <Wrapper>
-          <Text>{message.text}</Text>
-          <Time> {formatDate(message.createdAt)}</Time>
+          {message.type === "file" ? (
+            <ImageMessage message={message} />
+          ) : (
+            <TextMessage message={message} />
+          )}
         </Wrapper>
       )}
     </>
   );
 };
-
+const ImageMessage=({message})=>{
+  return (
+    <>
+      <Box  style={{position:'relative'}}>
+        {message?.text?.includes(".pdf") ? (
+          <Box style={{display:'flex'}}>
+            <img src={iconPDF} alt="pdf" style={{width:80}} />
+          <Typography style={{fontSize:14}} >{message.text.split('/').pop()}</Typography>
+          </Box>
+        ) : (
+          <img
+            src={message.text}
+            alt={message.text}
+            style={{ width: 300, height: "100%", objectFit: "cover" }}
+          />
+        )}
+        <Time style={{position:'absolute' ,bottom:0,right:0}}>
+          <GetAppIcon style={{border:'1px solid gray',borderRadius:'50%',marginRight:10}} fontSize='small' 
+          onClick={(e)=>downloadMedia(e,message.text)}
+          /> {formatDate(message.createdAt)}</Time>
+      </Box>
+    </>
+  );
+}
+const TextMessage = ({ message }) => {
+  return (
+    <>
+      <Text>{message.text}</Text>
+      <Time> {formatDate(message.createdAt)}</Time>
+    </>
+  );
+};
 export default Message;
