@@ -23,7 +23,8 @@ const BoxWrapper=styled(Box)`
         font-weight: 200;
     }
     & :last-child{
-
+      margin: 14px 0;
+      color: #4A4A4A;
     }
 `
 const DescriptionContainer=styled(Box)`

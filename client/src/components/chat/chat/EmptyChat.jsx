@@ -15,7 +15,7 @@ const Container = styled(Box)`
 `;
 
 const Image = styled("img")({
-  marginTop: 100,
+  marginTop: 150,
   width: 400,
 });
 const Title = styled(Typography)`
